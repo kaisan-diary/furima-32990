@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_tweet, only: [:edit, :show, :update, :destroy]
+  before_action :set_item, only: [:edit, :show, :update, :destroy]
   before_action :move_to_index, only: [:edit, :destroy]
   
 
@@ -50,11 +50,11 @@ class ItemsController < ApplicationController
     params.require(:item).permit(:name, :explanation, :category_id, :condition_id, :shipping_burden_id, :prefecture_id, :shipping_date_id, :price, :image ).merge(user_id: current_user.id)
   end  
 
-  def set_tweet
+  def set_item
     @item = Item.find(params[:id])
   end
 
   def move_to_index
-    redirect_to root_path unless user_signed_in? && current_user.id == @item.user_id
+    redirect_to root_path if user_signed_in? && current_user.id == @item.user_id || @item.order != nil
   end
 end

@@ -14,12 +14,12 @@ class Item < ApplicationRecord
     validates :image 
     validates :name
     validates :explanation
-    validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "is out of setting range"}
+    validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "が設定範囲外です"}
   end  
 
-  validates :price, numericality: { only_integer: true, message: "Half-width number." }
+  validates :price, numericality: { only_integer: true, message: "は半角数値で入力してください" }
 
-  with_options numericality: { other_than: 1, message: "Select" } do
+  with_options numericality: { other_than: 1, message: "を選択してください" } do
     validates :category_id
     validates :condition_id
     validates :shipping_burden_id

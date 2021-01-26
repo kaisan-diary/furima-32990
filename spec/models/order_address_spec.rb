@@ -33,12 +33,12 @@ RSpec.describe OrderAddress, type: :model do
       it 'postal_codeが半角のハイフンを含んだ正しい形式でないと購入できない' do
         @order_address.postal_code = '1234567'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+        expect(@order_address.errors.full_messages).to include("Postal code はハイフンを入れて正しく入力してください")
       end
       it 'prefecture_idが1だと購入できない' do
         @order_address.prefecture_id = 1
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Prefecture can't be blank")
+        expect(@order_address.errors.full_messages).to include("Prefecture を選択してください")
       end
       it 'cityが空だと購入できない' do
         @order_address.city = nil
@@ -58,7 +58,7 @@ RSpec.describe OrderAddress, type: :model do
       it 'phone_numberが全角数字だと購入できない' do
         @order_address.phone_number = '０９０４５６７８９７６'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Phone number Input only number")
+        expect(@order_address.errors.full_messages).to include("Phone number は半角数字で入力してください")
       end
       it 'phone_numberが12桁以上だと購入できない' do
         @order_address.phone_number = '090456787654'
